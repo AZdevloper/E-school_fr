@@ -16,7 +16,7 @@ export default {
     const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
     return httpClient(url).then(({ headers, json }) => {
-        debugger;
+        
       return {
         data: json,
         total: Array.isArray(json) ?  json.length : 0,
