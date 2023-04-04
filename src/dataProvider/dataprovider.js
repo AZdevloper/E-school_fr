@@ -4,6 +4,16 @@ import { stringify } from "query-string";
 
 const apiUrl = "http://127.0.0.1:8000/api";
 const httpClient = fetchUtils.fetchJson;
+// const httpClient = (url, options = {}) => {
+//   if (!options.headers) {
+//     options.headers = new Headers({
+//       Accept: "application/json",
+//     });
+//   }
+//   options.credentials = "include";
+//   console.log({options});
+//   return fetchUtils.fetchJson(url, options);
+// };
 export default {
   getList: (resource, params) => {
     const { page, perPage } = params.pagination;
@@ -80,10 +90,14 @@ export default {
     }).then(({ json }) => ({ data: json }));
   },
 
-  delete: (resource, params) =>
+  delete: (resource, params) =>{
+     console.log({params});
     httpClient(`${apiUrl}/${resource}/${params.id}`, {
       method: "DELETE",
-    }).then(({ json }) => ({ data: json })),
+    }).then(({ json }) => ({ data: json }))
+  },
+ 
+    
 
   deleteMany: (resource, params) => {
     const query = {
