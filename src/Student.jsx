@@ -5,8 +5,10 @@ import {
   EmailField,
   DateField,
   ReferenceField,
-  EditButton,
+ 
   Edit,
+  EditButton,
+  DeleteButton,
   Create,
   SimpleForm,
   ReferenceInput,
@@ -16,20 +18,22 @@ import {
 export const StudentList = () => (
   <List>
     <Datagrid rowClick="edit">
-      <TextField source="id" />
+      <TextField sx={{ backgroundColor: "",display: "none" }} type="hidden" source="id" />
       <TextField source="name" />
       <EmailField source="email" />
       <DateField source="email_verified_at" />
       <DateField source="created_at" />
       <DateField source="updated_at" />
+      <EditButton path="/post" />
+      <DeleteButton />
     </Datagrid>
   </List>
 );
 
 export const StudentCreate = () => (
-  <Create>
+  <Create title="add new student">
     <SimpleForm>
-      <TextInput source="name"  />
+      <TextInput source="name" />
       <TextInput source="email" />
       <TextInput source="password" />
       <TextInput source="password_confirmation" />
@@ -40,7 +44,7 @@ export const StudentCreate = () => (
 export const StudentEdit = () => (
   <Edit>
     <SimpleForm>
-      <TextInput source="id" disabled />
+      <TextInput source="id" sx={{display:"none"}} disabled />
       {/* <ReferenceInput source="userId" reference="users" /> */}
       <TextInput source="name" />
       <TextInput source="email" />
