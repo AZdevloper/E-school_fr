@@ -5,7 +5,6 @@ import {
   EmailField,
   DateField,
   ReferenceField,
- 
   Edit,
   EditButton,
   DeleteButton,
@@ -13,12 +12,23 @@ import {
   SimpleForm,
   ReferenceInput,
   TextInput,
+  Filter,
+  SearchInput,
 } from "react-admin";
 
-export const StudentList = () => (
-  <List>
+const StudentFilter = (props)=>(
+    <Filter {...props}>
+        <SearchInput placeholder="search fo a student " source="email" />
+
+    </Filter>
+)
+
+
+export const StudentList = (props) => {
+ return ( 
+    <List {...props} filters={<StudentFilter />}>
     <Datagrid rowClick="edit">
-      <TextField sx={{ backgroundColor: "",display: "none" }} type="hidden" source="id" />
+      <TextField sx={{ backgroundColor: "", display: "none" }} source="id" />
       <TextField source="name" />
       <EmailField source="email" />
       <DateField source="email_verified_at" />
@@ -27,8 +37,9 @@ export const StudentList = () => (
       <EditButton path="/post" />
       <DeleteButton />
     </Datagrid>
-  </List>
-);
+  </List>)
+}
+
 
 export const StudentCreate = () => (
   <Create title="add new student">
