@@ -11,6 +11,8 @@ import { TeacherList, TeacherCreate, TeacherEdit } from "./Teacher";
 import { StudentList, StudentCreate, StudentEdit } from "./Student";
 import { ClassList, ClassCreate, ClassEdit } from "./Class";
 import { EventList, EventCreate, EventEdit } from "./Event";
+import { HomeWorkList, HomeWorkCreate, HomeWorkEdit } from "./HomeWork";
+
 import myDataProvider from "./dataProvider/dataprovider";
 
 import { defaultTheme } from "react-admin";
@@ -65,7 +67,14 @@ const App = () => (
       recordRepresentation="name"
       edit={EventEdit}
     />
-  
+    <Resource
+      name="homeworks"
+      list={HomeWorkList}
+      create={HomeWorkCreate}
+      recordRepresentation="name"
+      edit={HomeWorkEdit}
+    />
+ 
   </Admin>
 );
 
