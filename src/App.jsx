@@ -12,6 +12,8 @@ import { StudentList, StudentCreate, StudentEdit } from "./Student";
 import { ClassList, ClassCreate, ClassEdit } from "./Class";
 import { EventList, EventCreate, EventEdit } from "./Event";
 import { HomeWorkList, HomeWorkCreate, HomeWorkEdit } from "./HomeWork";
+import { ResultList, ResultCreate, ResultEdit } from "./Result";
+
 
 import myDataProvider from "./dataProvider/dataprovider";
 
@@ -74,7 +76,20 @@ const App = () => (
       recordRepresentation="name"
       edit={HomeWorkEdit}
     />
- 
+    <Resource
+      name="results"
+      list={ResultList}
+      create={ResultCreate}
+      recordRepresentation="name"
+      edit={ResultEdit}
+    />
+    {/* <Resource
+      name="absences"
+      list={ClassList}
+      create={ClassCreate}
+      recordRepresentation="name"
+      edit={ClassEdit}
+    /> */}
   </Admin>
 );
 
