@@ -36,14 +36,13 @@ export const ClassList = () => (
       }}
       rowClick="edit"
     >
-      <MyTextField source="id" />
+      
       <TextField source="name" />
       <TextField source="subjectName" />
       <TextField source="teacherName" />
       <NumberField source="NumberOfStudent" />
       {/* <ReferenceField source="user_id" reference="users" /> */}
-      <DateField source="created_at" />
-      <DateField source="updated_at" />
+      
       <ShowButton />
       <EditButton />
       <DeleteButton />
@@ -58,14 +57,14 @@ export const ClassCreate = () => (
       <TextInput source="subjectName" />
       <TextInput source="teacherName" />
       <TextInput source="NumberOfStudent" />
-      <TextInput source="user_id" />
+      
     </SimpleForm>
   </Create>
 );
 export const ClassEdit = () => (
   <Edit>
     <SimpleForm>
-      <TextInput source="id" disabled />
+      
       <TextInput source="name" />
       <TextInput source="subjectName" />
       <TextInput source="teacherName" />
