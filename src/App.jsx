@@ -6,6 +6,7 @@ import {
   fetchUtils,
   EditGuesser,
 } from "react-admin";
+import SchoolIcon from '@mui/icons-material/School';
 
 import { TeacherList, TeacherCreate, TeacherEdit } from "./Teacher";
 import { StudentList, StudentCreate, StudentEdit } from "./Student";
@@ -13,6 +14,7 @@ import { ClassList, ClassCreate, ClassEdit } from "./Class";
 import { EventList, EventCreate, EventEdit } from "./Event";
 import { HomeWorkList, HomeWorkCreate, HomeWorkEdit } from "./HomeWork";
 import { ResultList, ResultCreate, ResultEdit } from "./Result";
+import { AbsenceList, AbsenceCreate, AbsenceEdit } from "./Absence";
 
 
 import myDataProvider from "./dataProvider/dataprovider";
@@ -42,6 +44,7 @@ const App = () => (
   <Admin authProvider={authProvider} dataProvider={myDataProvider}>
     <Resource name="/" recordRepresentation="home" />
     <Resource
+      icon={SchoolIcon}
       name="teachers"
       list={TeacherList}
       create={TeacherCreate}
@@ -83,13 +86,13 @@ const App = () => (
       recordRepresentation="name"
       edit={ResultEdit}
     />
-    {/* <Resource
+    <Resource
       name="absences"
-      list={ClassList}
-      create={ClassCreate}
+      list={AbsenceList}
+      create={AbsenceCreate}
       recordRepresentation="name"
-      edit={ClassEdit}
-    /> */}
+      edit={AbsenceEdit}
+    />
   </Admin>
 );
 
