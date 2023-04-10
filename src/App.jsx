@@ -21,7 +21,7 @@ import myDataProvider from "./dataProvider/dataprovider";
 
 import { defaultTheme } from "react-admin";
 import { authProvider } from './authProvider';
-
+import Dashboard from "./Dashboard";
 
 // const httpClient = (url, options = {}) => {
 //   if (!options.headers) {
@@ -41,7 +41,11 @@ const theme = {
   },
 };
 const App = () => (
-  <Admin authProvider={authProvider} dataProvider={myDataProvider}>
+  <Admin
+    dashboard={Dashboard}
+    authProvider={authProvider}
+    dataProvider={myDataProvider}
+  >
     <Resource name="/" recordRepresentation="home" />
     <Resource
       icon={SchoolIcon}
