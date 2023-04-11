@@ -7,10 +7,8 @@ import teacherIcon from "./assets/teacher.png";
 import studentIcon from "./assets/graduated.png";
 import classIcon from "./assets/class.png";
 import eventIcon from "./assets/calendar-date.png";
-// import { Loading, Error } from "./MyComponents";
-// import { Card, CardContent, CardHeader } from "@material-ui/core";
-import { Title } from "react-admin";
-
+import LineChart from "./Components/LineChart";
+import BarChart from "./Components/BarChart";
 const Dashboard = () => {
   const dataProvider = useDataProvider();
   const [statistics, setStatistics] = useState(null);
@@ -35,14 +33,13 @@ const Dashboard = () => {
         setLoading(false);
       });
   }, []);
-  useEffect(() => {
-    console.log("--------------", statistics);
-  }, [statistics]);
+
   //check if loading
   if (loading) {
     return <div>Loading...</div>;
   } else {
     const { id, teachers, students, classes, events } = statistics[0];
+
     return (
       <div>
         <SimplePaper {...statistics[0]}>
@@ -112,11 +109,11 @@ const Dashboard = () => {
             </div>
           </Paper>
         </SimplePaper>
-        <Title title="Dashboard" />
+        <LineChart />
+        {/* <BarChart /> */}
       </div>
     );
   }
 };
-
 
 export default Dashboard;
