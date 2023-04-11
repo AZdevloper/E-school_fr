@@ -12,9 +12,36 @@ import BarChart from "./Components/BarChart";
 const Dashboard = () => {
   const dataProvider = useDataProvider();
   const [statistics, setStatistics] = useState(null);
+  const [absences, setAbsences] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
 
+  const extractCount = (array) => {
+    // creat new array with 12 elements with 0 value
+
+    let countAbsenceByMonth = {
+      month_9: 0,
+      month_10: 0,
+      month_11: 0,
+      month_12: 0,
+      month_1: 0,
+      month_2: 0,
+      month_3: 0,
+      month_4: 0,
+      month_5: 0,
+      month_6: 0,
+      month_7: 0,
+      month_8: 0,
+    };
+    for (let i = 0; i < array.length; i++) {
+      const key = "month_" + array[i].month;
+      const value = array[i].count;
+      countAbsenceByMonth[key] = value;
+      
+    }
+ const   countAbsence = Object.values(countAbsenceByMonth);
+    return countAbsence;
+  };
   useEffect(() => {
     dataProvider
       .getList("adminDash", {
@@ -22,11 +49,24 @@ const Dashboard = () => {
         sort: { field: "id", order: "DESC" },
       })
       .then(({ data }) => {
-        console.log(data);
         setStatistics(data);
 
         setLoading(false);
-        console.log(statistics);
+      })
+      .catch((error) => {
+        setError(error);
+        setLoading(false);
+      });
+    // get the absences of the each month
+    dataProvider
+      .getList("getAbsencesByMonth", {
+        pagination: 2,
+        sort: { field: "id", order: "DESC" },
+      })
+      .then(({ data }) => {
+        setAbsences(extractCount(data));
+
+        setLoading(false);
       })
       .catch((error) => {
         setError(error);
@@ -56,7 +96,7 @@ const Dashboard = () => {
               <span className="text-xl font-semibold">{teachers}</span>
             </div>
             <div>
-              <img src={teacherIcon} className="w-10   " alt="" srcset="" />
+              <img src={teacherIcon} className="w-10   " alt=""    />
             </div>
           </Paper>
 
@@ -73,7 +113,7 @@ const Dashboard = () => {
               <span className="text-xl font-semibold">{students}</span>
             </div>
             <div>
-              <img src={studentIcon} className="w-10   " alt="" srcset="" />
+              <img src={studentIcon} className="w-10   " alt=""    />
             </div>
           </Paper>
           <Paper
@@ -89,7 +129,7 @@ const Dashboard = () => {
               <span className="text-xl font-semibold">{events}</span>
             </div>
             <div>
-              <img src={eventIcon} className="w-10   " alt="" srcset="" />
+              <img src={eventIcon} className="w-10   " alt=""    />
             </div>
           </Paper>
           <Paper
@@ -105,11 +145,11 @@ const Dashboard = () => {
               <span className="text-xl font-semibold">{teachers}</span>
             </div>
             <div>
-              <img src={classIcon} className="w-10   " alt="" srcset="" />
+              <img src={classIcon} className="w-10   " alt=""    />
             </div>
           </Paper>
         </SimplePaper>
-        <LineChart />
+        <LineChart counts={absences} />
         {/* <BarChart /> */}
       </div>
     );
