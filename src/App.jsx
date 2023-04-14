@@ -1,10 +1,12 @@
 // in src/App.tsx
+import * as React from "react";
 import {
   Admin,
   Resource,
   ListGuesser,
   fetchUtils,
   EditGuesser,
+  usePermissions,
 } from "react-admin";
 import SchoolIcon from '@mui/icons-material/School';
 
@@ -15,6 +17,8 @@ import { EventList, EventCreate, EventEdit } from "./Event";
 import { HomeWorkList, HomeWorkCreate, HomeWorkEdit } from "./HomeWork";
 import { ResultList, ResultCreate, ResultEdit } from "./Result";
 import { AbsenceList, AbsenceCreate, AbsenceEdit } from "./Absence";
+import studentIcon from "./assets/graduated.png";
+
 
 
 import myDataProvider from "./dataProvider/dataprovider";
@@ -41,15 +45,18 @@ const theme = {
     mode: "dark", // Switching the dark mode on is a single property value change.
   },
 };
-const App = () => (
+const App = () => {
+  
+  
+
+return (
   <Admin
     dashboard={Dashboard}
-    
     authProvider={authProvider}
     dataProvider={myDataProvider}
   >
-    <Resource name="/" recordRepresentation="home" />
-    <Resource
+    
+     <Resource
       icon={SchoolIcon}
       name="teachers"
       list={TeacherList}
@@ -57,7 +64,11 @@ const App = () => (
       recordRepresentation="name"
       edit={TeacherEdit}
     />
+    <Resource name="/" recordRepresentation="home" />
+     
+   
     <Resource
+    icon={studentIcon}
       name="students"
       list={StudentList}
       create={StudentCreate}
@@ -102,5 +113,8 @@ const App = () => (
     />
   </Admin>
 );
+}
+  
+
 
 export default App;
