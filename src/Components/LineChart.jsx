@@ -56,7 +56,7 @@ function LineChart({ counts }) {
     },
   };
   return (
-    <div className="p-5">
+    <div className="">
       <Line data={data} options={options} />
     </div>
   );

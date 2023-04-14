@@ -9,7 +9,7 @@ const httpClient = (url, options = {}) => {
     });
   }
   options.credentials = "include";
-  console.log({ options });
+  // console.log({ options });
   return fetchUtils.fetchJson(url, options);
 };
 // TypeScript users must reference the type: `AuthProvider`
@@ -19,10 +19,15 @@ export const authProvider = {
     httpClient(`${apiUrl}/login`, {
       method: "POST",
       body: JSON.stringify({ email: username, password: password }),
-    }).then(( response ) => {
+    }).then((response) => {
+      debugger
       const body = JSON.parse(response.body);
-      localStorage.setItem("id", body.id);
-      localStorage.setItem("name", body.name);
+      // console.log({ body },body.role,body.api_token,body.permissions);
+      localStorage.setItem("role", body.role);
+      localStorage.setItem("api_token", body.api_token);
+      localStorage.setItem("permission", body.permissions);
+      //
+      
       return {
         // data: { ...params.data, id: json.id },
       };
@@ -43,10 +48,36 @@ export const authProvider = {
   },
   // called when the user navigates to a new location, to check for authentication
   checkAuth: () => {
-    return localStorage.getItem("name") && localStorage.getItem("id")
+    return localStorage.getItem("role") 
       ? Promise.resolve()
       : Promise.reject();
   },
   // called when the user navigates to a new location, to check for permissions / roles
-  getPermissions: () => Promise.resolve(),
+  // called when the user tries to access a resource that requires authentication
+  getPermissions: () => {
+    // return the permissions for the logged in user
+    const role = localStorage.getItem("role");
+    return role ? Promise.resolve(role) : Promise.reject();
+    // const role = localStorage.getItem("role");
+    // const permissions = JSON.parse(localStorage.getItem("permissions"));
+
+    // switch (role) {
+    //   case "admin":
+    //     return Promise.resolve({
+    //       students: permissions.includes("students"),
+    //       teachers: permissions.includes("teachers"),
+    //       classes: permissions.includes("classes"),
+    //       // ...
+    //     });
+    //   case "teacher":
+    //     return Promise.resolve({
+    //       students: true,
+    //       teachers: false,
+    //       classes: false,
+    //       // ...
+    //     });
+    //   default:
+    //     return Promise.reject(new Error("Unknown role"));
+    // }
+  },
 };

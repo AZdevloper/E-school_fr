@@ -23,6 +23,7 @@ import { defaultTheme } from "react-admin";
 import { authProvider } from './authProvider';
 import Dashboard from "./Dashboard";
 
+
 // const httpClient = (url, options = {}) => {
 //   if (!options.headers) {
 //     options.headers = new Headers({ Accept: "application/json" });
@@ -43,6 +44,7 @@ const theme = {
 const App = () => (
   <Admin
     dashboard={Dashboard}
+    
     authProvider={authProvider}
     dataProvider={myDataProvider}
   >
@@ -76,6 +78,7 @@ const App = () => (
       recordRepresentation="name"
       edit={EventEdit}
     />
+    {}
     <Resource
       name="homeworks"
       list={HomeWorkList}
