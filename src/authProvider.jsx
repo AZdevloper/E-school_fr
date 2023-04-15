@@ -20,7 +20,7 @@ export const authProvider = {
       method: "POST",
       body: JSON.stringify({ email: username, password: password }),
     }).then((response) => {
-      debugger
+      
       const body = JSON.parse(response.body);
       // console.log({ body },body.role,body.api_token,body.permissions);
       localStorage.setItem("role", body.role);
