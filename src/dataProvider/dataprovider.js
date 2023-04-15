@@ -3,17 +3,22 @@ import { stringify } from "query-string";
 //parseInt(headers.get('content-range').split('/').pop(), 10),
 
 const apiUrl = "http://127.0.0.1:8000/api";
-const httpClient = fetchUtils.fetchJson;
-// const httpClient = (url, options = {}) => {
-//   if (!options.headers) {
-//     options.headers = new Headers({
-//       Accept: "application/json",
-//     });
-//   }
-//   options.credentials = "include";
-//   console.log({options});
-//   return fetchUtils.fetchJson(url, options);
-// };
+// const httpClient = fetchUtils.fetchJson;
+const httpClient = (url, options = {}) => {
+  if (!options.headers) {
+    options.headers = new Headers({
+      Accept: "application/json",
+    });
+  }
+  const token = localStorage.getItem("api_token");
+  options.headers.set(
+    "Authorization",
+    `Bearer ${token}`
+  );
+  options.credentials = "include";
+  console.log({options});
+  return fetchUtils.fetchJson(url, options);
+};
 export default {
   getList: (resource, params) => {
     const { page, perPage } = params.pagination;
