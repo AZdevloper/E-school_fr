@@ -17,7 +17,12 @@ import { EventList, EventCreate, EventEdit } from "./Event";
 import { HomeWorkList, HomeWorkCreate, HomeWorkEdit } from "./HomeWork";
 import { ResultList, ResultCreate, ResultEdit } from "./Result";
 import { AbsenceList, AbsenceCreate, AbsenceEdit } from "./Absence";
-import studentIcon from "./assets/graduated.png";
+import { GiTeacher } from "react-icons/gi";
+import { FaSchool } from "react-icons/fa";
+import EventAvailableSharpIcon from "@mui/icons-material/EventAvailableSharp";
+import HomeWorkSharpIcon from "@mui/icons-material/HomeWorkSharp";
+import { GoChecklist } from "react-icons/go";
+import { BsPersonFillCheck } from "react-icons/bs";
 
 
 
@@ -55,9 +60,8 @@ return (
     authProvider={authProvider}
     dataProvider={myDataProvider}
   >
-    
-     <Resource
-      icon={SchoolIcon}
+    <Resource
+      icon={GiTeacher}
       name="teachers"
       list={TeacherList}
       create={TeacherCreate}
@@ -65,10 +69,9 @@ return (
       edit={TeacherEdit}
     />
     <Resource name="/" recordRepresentation="home" />
-     
-   
+
     <Resource
-    icon={studentIcon}
+      icon={SchoolIcon}
       name="students"
       list={StudentList}
       create={StudentCreate}
@@ -76,6 +79,7 @@ return (
       edit={StudentEdit}
     />
     <Resource
+      icon={FaSchool}
       name="classes"
       list={ClassList}
       create={ClassCreate}
@@ -83,6 +87,7 @@ return (
       edit={ClassEdit}
     />
     <Resource
+      icon={EventAvailableSharpIcon}
       name="events"
       list={EventList}
       create={EventCreate}
@@ -91,6 +96,7 @@ return (
     />
     {}
     <Resource
+      icon={HomeWorkSharpIcon}
       name="homeworks"
       list={HomeWorkList}
       create={HomeWorkCreate}
@@ -98,6 +104,7 @@ return (
       edit={HomeWorkEdit}
     />
     <Resource
+      icon={GoChecklist}
       name="results"
       list={ResultList}
       create={ResultCreate}
@@ -105,6 +112,7 @@ return (
       edit={ResultEdit}
     />
     <Resource
+      icon={BsPersonFillCheck}
       name="absences"
       list={AbsenceList}
       create={AbsenceCreate}
