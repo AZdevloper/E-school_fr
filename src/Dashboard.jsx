@@ -21,9 +21,10 @@ const Dashboard = () => {
   const [absences, setAbsences] = useState(null);
   const [loading, setLoading] = useState(true);
   const [marks, setMarks] = useState(null);
-  const [subjects, setSubjects] = useState(true);
+  const [StudentsMarks, setStudentsMarks] = useState(null);
+  const [Students, setStudents] = useState(null);
+  const [subjects, setSubjects] = useState([]);
   const [error, setError] = useState();
-
   const extractCount = (array) => {
   //   // creat new array with 12 elements with 0 value
     let countAbsenceByMonth = {
@@ -56,12 +57,25 @@ const Dashboard = () => {
       data.push(array[i].average_mark);
 
     }
-    
+
     setSubjects(labels);
     setMarks(data);
     setLoading(false);
   
   };
+    const extractStudentsMarks = (array) => {
+      const labels = [];
+      const data = [];
+      for (let i = 0; i < array.length; i++) {
+        labels.push(array[i].student_name);
+        data.push(array[i].mark_obtained);
+      }
+console.log({labels,data});
+      setStudents(labels);
+      setStudentsMarks(data);
+      
+    };
+
   useEffect(() => {
     dataProvider
       .getList("adminDash", {
@@ -78,36 +92,48 @@ const Dashboard = () => {
         setLoading(false);
       });
     // get the absences of the each month
-      dataProvider
-        .getList("getAbsencesByMonth", {
-          pagination: 2,
-          sort: { field: "id", order: "DESC" },
-        })
-        .then(({ data }) => {
-          setAbsences(extractCount(data));
+    dataProvider
+      .getList("getAbsencesByMonth", {
+        pagination: 2,
+        sort: { field: "id", order: "DESC" },
+      })
+      .then(({ data }) => {
+        setAbsences(extractCount(data));
 
-          setLoading(false);
-        })
-        .catch((error) => {
-          setError(error);
-          setLoading(false);
-        });
-    // get marks for each subject 
-      dataProvider
-        .getList("getAverageMarksBySubject", {
-          pagination: 2,
-          sort: { field: "id", order: "DESC" },
-        })
-        .then(({ data }) => {
-          
-          extractCountMarks(data);
-
-          
-        })
-        .catch((error) => {
-          setError(error);
-          setLoading(false);
-        });
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+        setLoading(false);
+      });
+    // get marks for each subject
+    dataProvider
+      .getList("getAverageMarksBySubject", {
+        pagination: 2,
+        sort: { field: "id", order: "DESC" },
+      })
+      .then(({ data }) => {
+        extractCountMarks(data);
+      })
+      .catch((error) => {
+        setError(error);
+        setLoading(false);
+      });
+    // get marks for each student
+    dataProvider
+      .getList("getResultForEachStudent", {
+        pagination: 2,
+        sort: { field: "id", order: "DESC" },
+      })
+      .then(({ data }) => {
+        
+        extractStudentsMarks(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+        setLoading(false);
+      });
   }, []);
 
   //check if loading
@@ -186,7 +212,7 @@ const Dashboard = () => {
               )
           )}
         </SimplePaper>
-        {permissions === "admin" ? (
+        {permissions === "admin" && (
           <Paper
             elevation={10}
             sx={{
@@ -196,17 +222,17 @@ const Dashboard = () => {
           >
             <LineChart counts={absences} />
           </Paper>
-        ) : permissions === "teacher" ? (
-          <Paper
-            elevation={10}
-            sx={{
-              bgcolor: "rgb(240 240 240    / var(--tw-bg-opacity))",
-            }}
-            className="text-center flex justify-center items-center  p-5 mt-5 bg-blue-400"
-          >
-            <BarChart marks={marks} subjects={subjects} />
-          </Paper>
-        ) : null}
+        )}
+        {permissions === "admin" && (
+          <div className=" flex justify-center items-center  p-5 mt-5 w-80 h-56 m-auto sm:w-96 sm:h-96 ">
+            <BarChart marks={marks} labels={subjects} />
+          </div>
+        )}
+        {permissions === "teacher" && (
+          <div className=" flex justify-center items-center  p-5 mt-5 w-80 h-56 m-auto sm:w-96 sm:h-96 ">
+            <BarChart marks={StudentsMarks} labels={Students} />
+          </div>
+        )}
       </div>
     );
   }

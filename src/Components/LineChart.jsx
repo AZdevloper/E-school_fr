@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Line } from "react-chartjs-2";
 
 import {
@@ -10,6 +10,7 @@ import {
   Tooltip,
 } from "chart.js";
 ChartJs.register(
+
   LineElement,
   CategoryScale,
   LinearScale,
@@ -18,6 +19,9 @@ ChartJs.register(
 );
 
 function LineChart({ counts }) {
+  useEffect(() => {
+    console.log(counts);
+  }, [counts]);
 
   const data = {
     labels: [
@@ -57,7 +61,7 @@ function LineChart({ counts }) {
   };
   return (
     <div className="">
-      <Line data={data} options={options} />
+      <Line id="33" data={data} options={options} />
     </div>
   );
 }

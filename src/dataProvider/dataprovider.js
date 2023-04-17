@@ -16,7 +16,7 @@ const httpClient = (url, options = {}) => {
     `Bearer ${token}`
   );
   options.credentials = "include";
-  console.log({options});
+  // console.log({options});
   return fetchUtils.fetchJson(url, options);
 };
 export default {

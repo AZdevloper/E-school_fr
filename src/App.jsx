@@ -60,14 +60,22 @@ return (
     authProvider={authProvider}
     dataProvider={myDataProvider}
   >
-    <Resource
-      icon={GiTeacher}
-      name="teachers"
-      list={TeacherList}
-      create={TeacherCreate}
-      recordRepresentation="name"
-      edit={TeacherEdit}
-    />
+    {(permissions) => (
+      <>
+        
+        {permissions === "admin" ? (
+          <Resource
+            icon={GiTeacher}
+            name="teachers"
+            list={TeacherList}
+            create={TeacherCreate}
+            recordRepresentation="name"
+            edit={TeacherEdit}
+          />
+        ) : null}
+      </>
+    )}
+
     <Resource name="/" recordRepresentation="home" />
 
     <Resource
