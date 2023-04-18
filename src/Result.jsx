@@ -15,7 +15,9 @@ import {
   ShowButton,
   DeleteButton,
   NumberField,
-  NumberInput
+  NumberInput,
+  SelectArrayInput,
+  SelectInput,
 } from "react-admin";
 
 export const ResultList = () => (
@@ -35,9 +37,14 @@ export const ResultEdit = () => (
   <Edit>
     <SimpleForm>
       <NumberInput source="mark_obtained" />
-      <TextInput source="student" />
-      <TextInput source="teacher" />
-      <TextInput source="subject" />
+
+      <ReferenceInput label="Student" source="student_id" reference="students">
+        <SelectArrayInput optionText="name" />
+      </ReferenceInput>
+      <ReferenceInput label="Student" source="subject_id" reference="subjects">
+        <SelectInput optionText="name" />
+      </ReferenceInput>
+      
     </SimpleForm>
   </Edit>
 );

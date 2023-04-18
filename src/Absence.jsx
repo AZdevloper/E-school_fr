@@ -16,6 +16,8 @@ import {
   DeleteButton,
   NumberField,
   NumberInput,
+  SelectArrayInput,
+  SelectInput,
 } from "react-admin";
 
 export const AbsenceList = () => (
@@ -25,7 +27,7 @@ export const AbsenceList = () => (
       <DateField source="date" />
       <NumberField source="absenceHours" />
       <TextField source="student" />
-      <TextField source="teacher" />
+     
       <TextField source="subject" />
       <ShowButton />
       <EditButton />
@@ -38,9 +40,14 @@ export const AbsenceEdit = () => (
     <SimpleForm>
       <DateInput source="date" />
       <NumberInput source="absenceHours" />
-      <TextInput source="student" />
-      {/* <TextInput source="teacher" /> */}
-      <TextInput source="subject" />
+
+      <ReferenceInput label="Student" source="student_id" reference="students">
+        <SelectInput optionText="name" />
+      </ReferenceInput>
+
+      <ReferenceInput label="Subject" source="subject_id" reference="subjects">
+        <SelectInput optionText="name" />
+      </ReferenceInput>
     </SimpleForm>
   </Edit>
 );
@@ -50,9 +57,9 @@ export const AbsenceCreate = () => (
     <SimpleForm>
       <DateInput source="date" />
       <NumberInput source="absenceHours" />
-      <TextInput source="student_id" />
-      <TextInput source="teacher_id" />
-      <TextInput source="subject_id" />
+      <ReferenceInput label="Student" source="student_id" reference="students">
+        <SelectInput optionText="name" />
+      </ReferenceInput>
     </SimpleForm>
   </Create>
 );

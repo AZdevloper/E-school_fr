@@ -51,84 +51,101 @@ const theme = {
   },
 };
 const App = () => {
-  
-  
+  //only teacher : Absences,Homeworks,Results
+  //only admin : Teachers,Classes
+  //common :student, events,Dashboard,
+  const resources = [
+    {
+      icon: GiTeacher,
+      name: "teachers",
+      list: TeacherList,
+      create: TeacherCreate,
+      recordRepresentation: "name",
+      edit: TeacherEdit,
+      accessFor: ["admin"],
+    },
+    {
+      icon: SchoolIcon,
+      name: "students",
+      list: StudentList,
+      create: StudentCreate,
+      recordRepresentation: "name",
+      edit: StudentEdit,
+      accessFor: ["admin", "teacher"],
 
-return (
-  <Admin
-    dashboard={Dashboard}
-    authProvider={authProvider}
-    dataProvider={myDataProvider}
-  >
-    {(permissions) => (
-      <>
-        
-        {permissions === "admin" ? (
-          <Resource
-            icon={GiTeacher}
-            name="teachers"
-            list={TeacherList}
-            create={TeacherCreate}
-            recordRepresentation="name"
-            edit={TeacherEdit}
-          />
-        ) : null}
-      </>
-    )}
+    },
+    {
+      icon: FaSchool,
+      name: "classes",
+      list: ClassList,
+      create: ClassCreate,
+      recordRepresentation: "name",
+      edit: ClassEdit,
+      accessFor: ["admin"],
+    },
+    {
+      icon: EventAvailableSharpIcon,
+      name: "events",
+      list: EventList,
+      create: EventCreate,
+      recordRepresentation: "name",
+      edit: EventEdit,
+      accessFor:["admin","teacher"]
+    },
+    {
+      icon: HomeWorkSharpIcon,
+      name: "homeworks",
+      list: HomeWorkList,
+      create: HomeWorkCreate,
+      recordRepresentation: "name",
+      edit: HomeWorkEdit,
+      accessFor: ["teacher"],
+    },
+    {
+      icon: GoChecklist,
+      name: "results",
+      list: ResultList,
+      create: ResultCreate,
+      recordRepresentation: "name",
+      edit: ResultEdit,
+      accessFor: ["teacher"],
+    },
+    {
+      icon: BsPersonFillCheck,
+      name: "absences",
+      list: AbsenceList,
+      create: AbsenceCreate,
+      recordRepresentation: "name",
+      edit: AbsenceEdit,
+      accessFor: ["teacher"],
+    },
+  ];
 
-    <Resource name="/" recordRepresentation="home" />
-
-    <Resource
-      icon={SchoolIcon}
-      name="students"
-      list={StudentList}
-      create={StudentCreate}
-      recordRepresentation="name"
-      edit={StudentEdit}
-    />
-    <Resource
-      icon={FaSchool}
-      name="classes"
-      list={ClassList}
-      create={ClassCreate}
-      recordRepresentation="name"
-      edit={ClassEdit}
-    />
-    <Resource
-      icon={EventAvailableSharpIcon}
-      name="events"
-      list={EventList}
-      create={EventCreate}
-      recordRepresentation="name"
-      edit={EventEdit}
-    />
-    {}
-    <Resource
-      icon={HomeWorkSharpIcon}
-      name="homeworks"
-      list={HomeWorkList}
-      create={HomeWorkCreate}
-      recordRepresentation="name"
-      edit={HomeWorkEdit}
-    />
-    <Resource
-      icon={GoChecklist}
-      name="results"
-      list={ResultList}
-      create={ResultCreate}
-      recordRepresentation="name"
-      edit={ResultEdit}
-    />
-    <Resource
-      icon={BsPersonFillCheck}
-      name="absences"
-      list={AbsenceList}
-      create={AbsenceCreate}
-      recordRepresentation="name"
-      edit={AbsenceEdit}
-    />
-  </Admin>
-);
+  return (
+    <Admin
+      dashboard={Dashboard}
+      authProvider={authProvider}
+      dataProvider={myDataProvider}
+    >
+      {(permissions) => (
+        <>
+          {resources.map((resource) => (
+            resource.accessFor.includes(permissions) && (
+            <Resource
+              key={resource.name}
+              icon={resource.icon}
+              name={resource.name}
+              list={resource.list}
+              create={resource.create}
+              recordRepresentation={resource.recordRepresentation}
+              edit={resource.edit}
+            />
+            )
+          ))}
+        </>
+      )}
+    </Admin>
+  );
 }
   
 

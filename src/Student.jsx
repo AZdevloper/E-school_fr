@@ -14,6 +14,7 @@ import {
   TextInput,
   Filter,
   SearchInput,
+  SelectArrayInput,
 } from "react-admin";
 
 const StudentFilter = (props)=>(
@@ -46,6 +47,9 @@ export const StudentCreate = () => (
     <SimpleForm>
       <TextInput source="name" />
       <TextInput source="email" />
+      <ReferenceInput label="Class" source="class_id" reference="classes">
+        <SelectArrayInput optionText="name" />
+      </ReferenceInput>
       <TextInput source="password" />
       <TextInput source="password_confirmation" />
       {/* <TextInput source="role" placeholder="teacher" disabled={true}/> */}
@@ -55,10 +59,15 @@ export const StudentCreate = () => (
 export const StudentEdit = () => (
   <Edit>
     <SimpleForm>
-      <TextInput source="id" sx={{display:"none"}} disabled />
+      <TextInput source="id" sx={{ display: "none" }} disabled />
       {/* <ReferenceInput source="userId" reference="users" /> */}
       <TextInput source="name" />
       <TextInput source="email" />
+      <ReferenceInput label="Class" source="class_id" reference="classes">
+        <SelectArrayInput optionText="name" />
+      </ReferenceInput>
+      <TextInput source="password" />
+      <TextInput source="password_confirmation" />
     </SimpleForm>
   </Edit>
 );
