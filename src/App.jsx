@@ -53,7 +53,7 @@ const theme = {
 const App = () => {
   //only teacher : Absences,Homeworks,Results
   //only admin : Teachers,Classes
-  //common :student, events,Dashboard,
+  //common :student, events,Dashboard,Absences
   const resources = [
     {
       icon: GiTeacher,
@@ -62,7 +62,8 @@ const App = () => {
       create: TeacherCreate,
       recordRepresentation: "name",
       edit: TeacherEdit,
-      accessFor: ["admin"],
+      accessResource: ["admin"],
+      accessViewCreate: ["admin"],
     },
     {
       icon: SchoolIcon,
@@ -71,8 +72,8 @@ const App = () => {
       create: StudentCreate,
       recordRepresentation: "name",
       edit: StudentEdit,
-      accessFor: ["admin", "teacher"],
-
+      accessResource: ["admin", "teacher"],
+      accessViewCreate: ["admin", "teacher"],
     },
     {
       icon: FaSchool,
@@ -81,7 +82,8 @@ const App = () => {
       create: ClassCreate,
       recordRepresentation: "name",
       edit: ClassEdit,
-      accessFor: ["admin"],
+      accessResource: ["admin"],
+      accessViewCreate: ["admin"],
     },
     {
       icon: EventAvailableSharpIcon,
@@ -90,7 +92,8 @@ const App = () => {
       create: EventCreate,
       recordRepresentation: "name",
       edit: EventEdit,
-      accessFor:["admin","teacher"]
+      accessResource: ["admin", "teacher"],
+      accessViewCreate: ["admin"],
     },
     {
       icon: HomeWorkSharpIcon,
@@ -99,7 +102,8 @@ const App = () => {
       create: HomeWorkCreate,
       recordRepresentation: "name",
       edit: HomeWorkEdit,
-      accessFor: ["teacher"],
+      accessResource: ["teacher"],
+      accessViewCreate: ["teacher"],
     },
     {
       icon: GoChecklist,
@@ -108,7 +112,8 @@ const App = () => {
       create: ResultCreate,
       recordRepresentation: "name",
       edit: ResultEdit,
-      accessFor: ["teacher"],
+      accessResource: ["teacher"],
+      accessViewCreate: ["teacher"],
     },
     {
       icon: BsPersonFillCheck,
@@ -117,7 +122,8 @@ const App = () => {
       create: AbsenceCreate,
       recordRepresentation: "name",
       edit: AbsenceEdit,
-      accessFor: ["teacher"],
+      accessResource: ["admin", "teacher"],
+      accessViewCreate: ["admin", "teacher"],
     },
   ];
 
@@ -129,19 +135,24 @@ const App = () => {
     >
       {(permissions) => (
         <>
-          {resources.map((resource) => (
-            resource.accessFor.includes(permissions) && (
-            <Resource
-              key={resource.name}
-              icon={resource.icon}
-              name={resource.name}
-              list={resource.list}
-              create={resource.create}
-              recordRepresentation={resource.recordRepresentation}
-              edit={resource.edit}
-            />
-            )
-          ))}
+          {resources.map(
+            (resource) =>
+              resource.accessResource.includes(permissions) && (
+                <Resource
+                  key={resource.name}
+                  icon={resource.icon}
+                  name={resource.name}
+                  list={StudentList}
+                  create={
+                    resource.accessViewCreate.includes(permissions)
+                      ? resource.create
+                      : null
+                  }
+                  recordRepresentation={resource.recordRepresentation}
+                  edit={resource.edit}
+                />
+              )
+          )}
         </>
       )}
     </Admin>

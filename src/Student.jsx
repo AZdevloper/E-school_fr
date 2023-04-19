@@ -16,7 +16,7 @@ import {
   SearchInput,
   SelectArrayInput,
 } from "react-admin";
-
+import { usePermissions } from "react-admin";
 const StudentFilter = (props)=>(
     <Filter {...props}>
         <SearchInput placeholder="search fo a student " source="email" />
@@ -26,19 +26,21 @@ const StudentFilter = (props)=>(
 
 
 export const StudentList = (props) => {
- return ( 
-    <List {...props} filters={<StudentFilter />}>
-    <Datagrid rowClick="edit">
-      <TextField sx={{ backgroundColor: "", display: "none" }} source="id" />
-      <TextField source="name" />
-      <EmailField source="email" />
-      <DateField source="email_verified_at" />
-      <DateField source="created_at" />
-      <DateField source="updated_at" />
-      <EditButton path="/post" />
-      <DeleteButton />
-    </Datagrid>
-  </List>)
+  const { permissions } = usePermissions();
+ return (
+   <List {...props} filters={<StudentFilter />}>
+     <Datagrid >
+       <TextField source="name" />
+       <EmailField source="email" />
+       <DateField source="email_verified_at" />
+       <DateField source="created_at" />
+       <DateField source="updated_at" />
+
+       {permissions === "admin" ? <EditButton path="/post" /> : null}
+       {permissions === "admin" ? <DeleteButton /> : null}
+     </Datagrid>
+   </List>
+ );
 }
 
 
