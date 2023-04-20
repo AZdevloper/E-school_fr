@@ -1,4 +1,5 @@
 import {
+  usePermissions,
   List,
   Datagrid,
   TextField,
@@ -17,7 +18,9 @@ import {
     
 } from "react-admin";
 
-export const EventList = () => (
+export const EventList = () => {
+   const { permissions } = usePermissions();
+return (
   <List>
     <Datagrid rowClick="edit">
       {/* <TextField source="id" /> */}
@@ -26,12 +29,15 @@ export const EventList = () => (
       <DateField source="date" />
 
       <DateField source="created_at" />
-      <ShowButton />
-      <EditButton />
-      <DeleteButton />
+      {permissions === "admin" ? <ShowButton  /> : null}
+      {permissions === "admin" ? <EditButton /> : null}
+      {permissions === "admin" ? <DeleteButton /> : null}
     </Datagrid>
   </List>
 );
+}
+ 
+
 export const EventEdit = () => (
   <Edit>
     <SimpleForm>

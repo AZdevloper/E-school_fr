@@ -1,4 +1,5 @@
 import {
+  usePermissions,
   List,
   Datagrid,
   TextField,
@@ -16,7 +17,7 @@ import {
   SearchInput,
   SelectArrayInput,
 } from "react-admin";
-import { usePermissions } from "react-admin";
+
 const StudentFilter = (props)=>(
     <Filter {...props}>
         <SearchInput placeholder="search fo a student " source="email" />

@@ -142,7 +142,7 @@ const App = () => {
                   key={resource.name}
                   icon={resource.icon}
                   name={resource.name}
-                  list={StudentList}
+                  list={resource.list}
                   create={
                     resource.accessViewCreate.includes(permissions)
                       ? resource.create

@@ -13,6 +13,7 @@ import {
   TextInput,
 } from "react-admin";
 
+
 export const TeacherList = () => (
   <List>
     <Datagrid rowClick="edit">
@@ -26,26 +27,28 @@ export const TeacherList = () => (
   </List>
 );
 
-export const TeacherCreate = () => (
-  <Create>
+export const TeacherCreate = () => {
+
+  return (
+    <Create>
+      <SimpleForm >
+        <TextInput source="name" />
+        <TextInput source="email" />
+        <TextInput source="password" />
+        <TextInput source="password_confirmation" />
+        {/* <TextInput source="role" placeholder="teacher" disabled={true}/> */}
+      </SimpleForm>
+    </Create>
+  );
+};
+export const TeacherEdit = () => (
+  <Edit>
     <SimpleForm>
+      
       <TextInput source="name" />
       <TextInput source="email" />
       <TextInput source="password" />
       <TextInput source="password_confirmation" />
-      {/* <TextInput source="role" placeholder="teacher" disabled={true}/> */}
-    </SimpleForm>
-  </Create>
-);
-export const TeacherEdit = () => (
-  <Edit>
-    <SimpleForm>
-      <TextInput source="id" disabled />
-      {/* <ReferenceInput source="userId" reference="users" /> */}
-      <TextInput source="name" />
-      <TextInput source="email" />
-      <TextInput source="title" />
-      <TextInput source="body" multiline rows={5} />
     </SimpleForm>
   </Edit>
 );
