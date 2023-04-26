@@ -18,19 +18,14 @@ import {
   SelectArrayInput,
 } from "react-admin";
 
-const StudentFilter = (props)=>(
-    <Filter {...props}>
-        <SearchInput placeholder="search fo a student " source="email" />
-
-    </Filter>
-)
 
 
-export const StudentList = (props) => {
+
+export const StudentList = () => {
   const { permissions } = usePermissions();
  return (
-   <List {...props} filters={<StudentFilter />}>
-     <Datagrid >
+   <List pagination={false}>
+     <Datagrid>
        <TextField source="name" />
        <EmailField source="email" />
        <DateField source="email_verified_at" />
@@ -55,7 +50,6 @@ export const StudentCreate = () => (
       </ReferenceInput>
       <TextInput source="password" />
       <TextInput source="password_confirmation" />
-      {/* <TextInput source="role" placeholder="teacher" disabled={true}/> */}
     </SimpleForm>
   </Create>
 );
@@ -63,7 +57,6 @@ export const StudentEdit = () => (
   <Edit>
     <SimpleForm>
       <TextInput source="id" sx={{ display: "none" }} disabled />
-      {/* <ReferenceInput source="userId" reference="users" /> */}
       <TextInput source="name" />
       <TextInput source="email" />
       <ReferenceInput label="Class" source="class_id" reference="classes">

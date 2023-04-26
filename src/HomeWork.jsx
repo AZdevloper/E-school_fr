@@ -17,13 +17,13 @@ import {
 } from "react-admin";
 
 export const HomeWorkList = () => (
-  <List>
+  <List pagination={false}>
     <Datagrid rowClick="edit">
       {/* <TextField source="id" /> */}
       <TextField source="id" />
       <TextField source="title" />
       <TextField source="content" />
-      <DateField source="deadline" />
+      <DateField showDate={true} source="deadline" />
       <TextField source="teacher" />
       <ShowButton />
       <EditButton />

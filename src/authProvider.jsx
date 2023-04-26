@@ -34,7 +34,7 @@ export const authProvider = {
     }),
   // called when the user clicks on the logout button
   logout: () => {
-    localStorage.removeItem("id");
+    localStorage.removeItem("role");
     localStorage.removeItem("name");
     return Promise.resolve();
   },

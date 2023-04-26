@@ -21,15 +21,13 @@ import {
 export const EventList = () => {
    const { permissions } = usePermissions();
 return (
-  <List>
+  <List pagination={false}>
     <Datagrid rowClick="edit">
-      {/* <TextField source="id" /> */}
       <TextField source="name" />
       <TextField source="description" />
       <DateField source="date" />
-
       <DateField source="created_at" />
-      {permissions === "admin" ? <ShowButton  /> : null}
+      {permissions === "admin" ? <ShowButton /> : null}
       {permissions === "admin" ? <EditButton /> : null}
       {permissions === "admin" ? <DeleteButton /> : null}
     </Datagrid>

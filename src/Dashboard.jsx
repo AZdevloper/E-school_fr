@@ -148,7 +148,7 @@ console.log({labels,data});
            title: "TEACHERS",
            value: teachers,
            icon: teacherIcon,
-           width: "20rem",
+           width: "30rem",
            accessFor: ["admin"],
          },
          {
@@ -197,7 +197,7 @@ console.log({labels,data});
                   elevation={10}
                   sx={{
                     bgcolor: "rgb(219 234 254 / var(--tw-bg-opacity))",
-                    width: card.width,
+                    width: "20rem",
                   }}
                   className="text-center flex justify-center items-center  bg-blue-400"
                 >
@@ -218,14 +218,14 @@ console.log({labels,data});
             sx={{
               bgcolor: "rgb(240 240 240    / var(--tw-bg-opacity))",
             }}
-            className="p-1   mt-5 bg-blue-400"
+            className="p-1   mt-5 bg-blue-400 sm:w-[40rem]  "
           >
             <LineChart counts={absences} />
           </Paper>
         )}
         {permissions === "admin" && (
-          <div className=" flex justify-center items-center  p-5 mt-5 w-80 h-56 m-auto sm:w-96 sm:h-96 ">
-            <BarChart marks={marks} labels={subjects} />
+          <div className=" flex justify-center items-center  p-5 mt-5  h-56 m-auto ">
+            <BarChart marks={marks} labels={subjects} className="" />
           </div>
         )}
         {permissions === "teacher" && (

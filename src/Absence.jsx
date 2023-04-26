@@ -18,23 +18,28 @@ import {
   NumberInput,
   SelectArrayInput,
   SelectInput,
+  usePermissions,
 } from "react-admin";
 
-export const AbsenceList = () => (
-  <List>
-    <Datagrid rowClick="edit">
-     
-      <DateField source="date" />
-      <NumberField source="absenceHours" />
-      <TextField source="student" />
-     
-      <TextField source="subject" />
-      <ShowButton />
-      <EditButton />
-      <DeleteButton />
-    </Datagrid>
-  </List>
-);
+export const AbsenceList = () => {
+   const { permissions } = usePermissions();
+  return (
+    <List pagination={false}>
+      <Datagrid rowClick="edit">
+        <DateField source="date" />
+        <NumberField source="absenceHours" />
+        <TextField source="student" />
+
+        <TextField source="subject" />
+        <ShowButton />
+        {permissions === "teacher" ? <EditButton /> : null}
+
+        <DeleteButton />
+      </Datagrid>
+    </List>
+  );
+};
+
 export const AbsenceEdit = () => (
   <Edit>
     <SimpleForm>
@@ -45,9 +50,7 @@ export const AbsenceEdit = () => (
         <SelectInput optionText="name" />
       </ReferenceInput>
 
-      <ReferenceInput label="Subject" source="subject_id" reference="subjects">
-        <SelectInput optionText="name" />
-      </ReferenceInput>
+     
     </SimpleForm>
   </Edit>
 );
@@ -60,6 +63,7 @@ export const AbsenceCreate = () => (
       <ReferenceInput label="Student" source="student_id" reference="students">
         <SelectInput optionText="name" />
       </ReferenceInput>
+     
     </SimpleForm>
   </Create>
 );

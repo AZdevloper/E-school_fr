@@ -32,6 +32,7 @@ import { defaultTheme } from "react-admin";
 import { authProvider } from './authProvider';
 import Dashboard from "./Dashboard";
 
+import MyLayout from "./MyLayout";
 
 // const httpClient = (url, options = {}) => {
 //   if (!options.headers) {
@@ -50,6 +51,9 @@ const theme = {
     mode: "dark", // Switching the dark mode on is a single property value change.
   },
 };
+
+
+
 const App = () => {
   //only teacher : Absences,Homeworks,Results
   //only admin : Teachers,Classes
@@ -73,7 +77,7 @@ const App = () => {
       recordRepresentation: "name",
       edit: StudentEdit,
       accessResource: ["admin", "teacher"],
-      accessViewCreate: ["admin", "teacher"],
+      accessViewCreate: ["admin"],
     },
     {
       icon: FaSchool,
@@ -123,15 +127,17 @@ const App = () => {
       recordRepresentation: "name",
       edit: AbsenceEdit,
       accessResource: ["admin", "teacher"],
-      accessViewCreate: ["admin", "teacher"],
+      accessViewCreate: [ "teacher"],
     },
   ];
 
   return (
     <Admin
+      layout={MyLayout}
       dashboard={Dashboard}
       authProvider={authProvider}
       dataProvider={myDataProvider}
+      sx={{ backgroundColor: "red" }}
     >
       {(permissions) => (
         <>

@@ -71,3 +71,10 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+.css-15uwmnx>:not(style){
+  
+  width: 12rem !important;
+}
+.css-15uwmnx{
+  justify-content: center !important;
+}

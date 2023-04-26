@@ -19,14 +19,26 @@ import {
   SelectArrayInput,
   SelectInput,
 } from "react-admin";
+import { Box, Button, Typography } from "@mui/material";
+import { CreateButton } from "react-admin";
+const Empty = () => (
+    <Box textAlign="center"  >
+        <Typography variant="h4" paragraph>
+            No results available
+        </Typography>
+        add  one  
+        <CreateButton sx={{border:"solid black 1px", margin:"5px"}} />
+       
+    </Box>
+);
 
 export const ResultList = () => (
-  <List>
+  <List empty={<Empty />} className=" flex justify-center" pagination={false}>
     <Datagrid rowClick="edit">
       <NumberField source="mark_obtained" />
-            <TextField source="student" />
-            <TextField source="teacher" />
-            <TextField source="subject" />
+      <TextField source="student" />
+      <TextField source="teacher" />
+      <TextField source="subject" />
       <ShowButton />
       <EditButton />
       <DeleteButton />
@@ -39,7 +51,7 @@ export const ResultEdit = () => (
       <NumberInput source="mark_obtained" />
 
       <ReferenceInput label="Student" source="student_id" reference="students">
-        <SelectArrayInput optionText="name" />
+        <SelectInput optionText="name" />
       </ReferenceInput>
       <ReferenceInput label="Student" source="subject_id" reference="subjects">
         <SelectInput optionText="name" />
@@ -52,10 +64,10 @@ export const ResultEdit = () => (
 export const ResultCreate = () => (
   <Create>
     <SimpleForm>
-      <TextInput source="student" />
+      <ReferenceInput label="Student" source="student_id" reference="students">
+        <SelectInput optionText="name" />
+      </ReferenceInput>
       <NumberInput source="mark_obtained" />
-      <TextInput     source="teacher" />
-      <TextInput source="subject" />
     </SimpleForm>
   </Create>
 );

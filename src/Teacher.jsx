@@ -15,7 +15,7 @@ import {
 
 
 export const TeacherList = () => (
-  <List>
+  <List pagination={false}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
       <TextField source="name" />
@@ -44,7 +44,6 @@ export const TeacherCreate = () => {
 export const TeacherEdit = () => (
   <Edit>
     <SimpleForm>
-      
       <TextInput source="name" />
       <TextInput source="email" />
       <TextInput source="password" />
