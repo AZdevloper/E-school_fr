@@ -25,7 +25,7 @@ export const authProvider = {
       // console.log({ body },body.role,body.api_token,body.permissions);
       localStorage.setItem("role", body.role);
       localStorage.setItem("api_token", body.api_token);
-      localStorage.setItem("permission", body.permissions);
+      
       //
       
       return {

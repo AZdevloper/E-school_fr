@@ -12,6 +12,7 @@ import eventIcon from "./assets/calendar-date.png";
 import home_worksIcon from "./assets/working.png";
 import LineChart from "./Components/LineChart";
 import BarChart from "./Components/BarChart";
+import Variants from "./Variants";
 const Dashboard = () => {
  
   const { permissions } = usePermissions();
@@ -22,7 +23,7 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [marks, setMarks] = useState(null);
   const [StudentsMarks, setStudentsMarks] = useState(null);
-  const [Students, setStudents] = useState(null);
+  const [Students, setStudents] = useState([]);
   const [subjects, setSubjects] = useState([]);
   const [error, setError] = useState();
   const extractCount = (array) => {
@@ -70,7 +71,7 @@ const Dashboard = () => {
         labels.push(array[i].student_name);
         data.push(array[i].mark_obtained);
       }
-console.log({labels,data});
+// console.log({labels,data});
       setStudents(labels);
       setStudentsMarks(data);
       
@@ -138,10 +139,11 @@ console.log({labels,data});
 
   //check if loading
   if (loading) {
-    return <div>Loading...</div>;
+    return <Variants/>;
   } else {
     const { id, teachers, students, classes, events, home_works } =
       statistics[0];
+      
        const cards = [
          {
            id: 1,
@@ -213,18 +215,12 @@ console.log({labels,data});
           )}
         </SimplePaper>
         {permissions === "admin" && (
-          <Paper
-            elevation={10}
-            sx={{
-              bgcolor: "rgb(240 240 240    / var(--tw-bg-opacity))",
-            }}
-            className="p-1   mt-5 bg-blue-400 sm:w-[40rem]  "
-          >
+          <div className="m-auto  p-1   mt-5  sm:w-[40rem]  ">
             <LineChart counts={absences} />
-          </Paper>
+          </div>
         )}
         {permissions === "admin" && (
-          <div className=" flex justify-center items-center  p-5 mt-5  h-56 m-auto ">
+          <div className="  p-5 mt-5  h-96 m-auto sm:w-[40rem]  ">
             <BarChart marks={marks} labels={subjects} className="" />
           </div>
         )}

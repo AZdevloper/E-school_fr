@@ -11,10 +11,14 @@ import {
   SimpleForm,
   ReferenceInput,
   TextInput,
+  usePermissions,
+  DeleteButton,
 } from "react-admin";
 
 
-export const TeacherList = () => (
+export const TeacherList = () => {
+   const { permissions } = usePermissions();
+  return (
   <List pagination={false}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
@@ -23,9 +27,13 @@ export const TeacherList = () => (
       <DateField source="email_verified_at" />
       <DateField source="created_at" />
       <DateField source="updated_at" />
+      {permissions === "admin" ? <EditButton path="/post" /> : null}
+      {permissions === "admin" ? <DeleteButton /> : null}
     </Datagrid>
   </List>
 );
+}
+  
 
 export const TeacherCreate = () => {
 

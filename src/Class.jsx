@@ -17,32 +17,22 @@ import {
   TextInput,
   NumberField,
   ShowButton,
+  SelectArrayInput,
+  SelectInput,
 } from "react-admin";
 
 
 
-export const MyTextField = styled(TextField)({
-  backgroundColor: "Lavender",
-  "& .RaDatagrid-headerCell": { 
-    backgroundColor: "MistyRose",
-  },
-});
+
 export const ClassList = () => (
-  <List>
-    <Datagrid
-      className="bg-orange-500"
-      sx={{
-        backgroundColor: "Lavender"
-      }}
-      rowClick="edit"
-    >
-      
+  <List pagination={false}>
+    <Datagrid>
       <TextField source="name" />
       <TextField source="subjectName" />
       <TextField source="teacherName" />
       <NumberField source="NumberOfStudent" />
       {/* <ReferenceField source="user_id" reference="users" /> */}
-      
+
       <ShowButton />
       <EditButton />
       <DeleteButton />
@@ -54,21 +44,29 @@ export const ClassCreate = () => (
   <Create>
     <SimpleForm>
       <TextInput source="name" />
-      <TextInput source="subjectName" />
-      <TextInput source="teacherName" />
       <TextInput source="NumberOfStudent" />
-      
+      <ReferenceInput label="teacher" source="teacher_id" reference="teachers">
+        <SelectInput optionText="name" />
+      </ReferenceInput>
+
+      <ReferenceInput label="subject" source="subject_id" reference="subjects">
+        <SelectInput optionText="name" />
+      </ReferenceInput>
     </SimpleForm>
   </Create>
 );
 export const ClassEdit = () => (
   <Edit>
     <SimpleForm>
-      
       <TextInput source="name" />
-      <TextInput source="subjectName" />
-      <TextInput source="teacherName" />
       <TextInput source="NumberOfStudent" />
+      <ReferenceInput label="teacher" source="teacher_id" reference="teachers">
+        <SelectInput optionText="name" />
+      </ReferenceInput>
+
+      <ReferenceInput label="subject" source="subject_id" reference="subjects">
+        <SelectInput optionText="name" />
+      </ReferenceInput>
     </SimpleForm>
   </Edit>
 );

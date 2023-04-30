@@ -63,7 +63,7 @@ const data = [
 ];
 
 const MyLineChart = ({ labels = [], marks = [] }) => {
-  // console.log(subjects);
+  console.log("====> ",{labels});
 
   //   const data = [
   //   {
