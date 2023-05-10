@@ -10,13 +10,13 @@ import {
 } from "react-admin";
 import SchoolIcon from '@mui/icons-material/School';
 
-import { TeacherList, TeacherCreate, TeacherEdit } from "./Teacher";
+import { TeacherList, TeacherCreate, TeacherEdit } from "./Crud/Teacher";
 import { StudentList, StudentCreate, StudentEdit } from "./Student";
-import { ClassList, ClassCreate, ClassEdit } from "./Class";
-import { EventList, EventCreate, EventEdit } from "./Event";
+import { ClassList, ClassCreate, ClassEdit } from "./Crud/Class";
+import { EventList, EventCreate, EventEdit } from "./Crud/Event";
 import { HomeWorkList, HomeWorkCreate, HomeWorkEdit } from "./HomeWork";
 import { ResultList, ResultCreate, ResultEdit } from "./Result";
-import { AbsenceList, AbsenceCreate, AbsenceEdit } from "./Absence";
+import { AbsenceList, AbsenceCreate, AbsenceEdit } from "./Crud/Absence";
 import { GiTeacher } from "react-icons/gi";
 import { FaSchool } from "react-icons/fa";
 import EventAvailableSharpIcon from "@mui/icons-material/EventAvailableSharp";
